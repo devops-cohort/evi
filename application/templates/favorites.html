@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block body_content %}
+        <h1>Favorite Eurvision Entries</h1>
+        <p>This web app is made using Flask!</p>
+	<div class="form">
+		<form method="POST" action="">
+			{{ form.hidden_tag() }}
+			<div>
+			{{ form.year.label }}
+                        {{ form.year }}
+                        {% if form.year.errors %}
+                                <div class="error">
+                                        {% for error in form.year.errors %}
+                                                <span>{{ error }} </span>
+                                        {% endfor %}
+                                </div>
+                        {% endif %}
+                        </div>
+			<br>
+			<div>
+			{{ form.country.label }}
+                        {{ form.country }}
+                        {% if form.country.errors %}
+                                <div class="error">
+                                        {% for error in form.country.errors %}
+                                                <span>{{ error }} </span>
+                                        {% endfor %}
+                                </div>
+                        {% endif %}
+                        </div>
+			<br>
+			<div>
+                        {{ form.performer.label }}
+                        {{ form.performer}}
+                        {% if form.performererrors %}
+                                <div class="error">
+                                        {% for error in form.performer.errors %}
+                                                <span>{{ error }} </span>
+                                        {% endfor %}
+                                </div>
+                        {% endif %}
+                        </div>
+			<br>
+			<div>
+                        {{ form.song.label }}
+                        {{ form.somg }}
+                        {% if form.song.errors %}
+                                <div class="error">
+                                        {% for error in form.song.errors %}
+                                                <span>{{ error }} </span>
+                                        {% endfor %}
+                                </div>
+                        {% endif %}
+                        </div>
+			<br>
+			<div class="form-group">
+                                {{ form.submit }}
+                        </div>
+		</form>
+	</div>
+{% endblock body_content %}
