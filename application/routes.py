@@ -1,4 +1,4 @@
-from flask import render_template,redirect,url_for, request
+from flask import render_template,redirect,url_for,request
 from application import app, db, Bcrypt
 from application.forms import PostForm, RegistrationForm, LoginForm,UpdateAccountForm
 from application.model import Posts, Users
@@ -71,5 +71,15 @@ def logout():
 @login_required
 def account():
     form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
+        current_user.email = form.email.data
+        db.session.commit()
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
+        form.email.data = current_user.email
     return render_template('account.html',title='Account',form=form)
 
