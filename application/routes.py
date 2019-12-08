@@ -26,7 +26,7 @@ def favorites():
        print(form.errors)
        return render_template('favorites.html', title='Eurovision Favorite Entries', form=form)
 
-@app.route('/login')
+@app.route('/login'), methods=[ 'GET','POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('about'))
@@ -46,7 +46,7 @@ def login():
 
     return render_template('login.html', title='Login', form=form)
 
-@app.route('/signup')
+@app.route('/signup'), methods=[ 'GET','POST'])
 def signup():
     form = RegistrationForm()
     if current_user.is_authenticated:
