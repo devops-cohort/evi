@@ -1,10 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from application.model import Users, Posts
+from application.model import * 
 from flask_login import LoginManager, current_user
-from application import login_manager
-from application import app
+from application import app,login_manager
+#from application import db, bcrypt
+#from flask_login import current_user
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
@@ -63,7 +64,7 @@ class RegistrationForm(FlaskForm):
     first_name = StringField('First Name',
             validators=[
              DataRequired(),
-             Length(min=4, max=30)
+             Length(min=1, max=30)
          ]
      )
 
@@ -93,15 +94,14 @@ class RegistrationForm(FlaskForm):
                 EqualTo('password')
             ]
     )
-
-
     submit = SubmitField('Sign Up')
 
-    def validate_email(self,email):
-        user = Users.query.filter_by(email=email.data).first()
+    #def validate_email(self, email):
+    #    user = Users.query.filter_by(email=email.data).first()
 
-        if user:
-            raise ValidationError('Email is alreadt in use!')
+
+     #   if user:
+      #      raise ValidationError('Email is alreadt in use!')
 
 class UpdateAccountForm(FlaskForm):
      first_name = StringField('First Name',
@@ -139,11 +139,11 @@ class UpdateAccountForm(FlaskForm):
      
      submit = SubmitField('Update')
      
-     def validate_email(self,email):
-        if email.data != current_user.email:
-            user = Users.query.filter_by(email =email.data).first()
-            if user:
-                raise ValidationError('Email already in use')
+     def validate_email(self, email):
+         if email.data != current_user.email:
+             user = Users.query.filter_by(email =email.data).first()
+             if user:
+                 raise ValidationError('Email already in use')
 
 class DeleteAccount(FlaskForm):
     delete = SubmitField('Delete your account')

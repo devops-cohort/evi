@@ -10,7 +10,7 @@ app = Flask(__name__)
 user=os.getenv('MYSQL_USER')
 password=os.getenv('MYSQL_PASSWORD')
 host=os.getenv('MYSQL_HOST')
-db=os.getenv('MYSQL_DATABASE')
+db=os.getenv('DATABASE')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://{0}:{1}@{2}/{3}'.format(user, password, host, db)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False

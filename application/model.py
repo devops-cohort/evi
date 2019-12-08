@@ -21,7 +21,7 @@ class Posts(db.Model):
             'Year:', self.year, '\r\n',
             'Country:', self.country, '\r\n',
             'Performer:', self.performer,'\r\n',
-            'Song', self.song, '\r\n'
+            'Song', self.song
         ])
 
 class Users(db.Model,UserMixin):
@@ -31,6 +31,10 @@ class Users(db.Model,UserMixin):
     email = db.Column(db.String(150),nullable=False, unique=True)
     password = db.Column(db.String(50), nullable=False)
     Posts = db.relationship("Posts", backref="Posts", lazy=True)
+    
+    def get_id(self):
+        return self.id
+
     def __repr__(self):
         return ''.join([
             'User ID: ',str(self.id), '\r\n',
@@ -39,3 +43,6 @@ class Users(db.Model,UserMixin):
             self.last_name
         ])
 
+@login_manager.user_loader
+def load_user(id):
+    return Users.query.get(init(id))

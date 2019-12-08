@@ -1,7 +1,7 @@
 from flask import render_template,redirect,url_for,request
-from application import app, db, Bcrypt
+from application import app, db, bcrypt
 from application.forms import PostForm, RegistrationForm, LoginForm,UpdateAccountForm
-from application.model import Posts, Users
+from application.model import *
 from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route('/')
@@ -12,7 +12,7 @@ def about():
 @app.route('/home')
 def home():
     Posts =Posts.query.order_by(Posts.id.desc()).all()
-    return render_template('home.html', title='Eurovision Favorite Entries')
+    return render_template('home.html', title='Eurovision Favorite Entries', posts=Posts)
 
 @app.route('/favorites', methods=[ 'GET','POST'])
 @login_required
@@ -47,7 +47,7 @@ def login():
         if next_page:
             return redirect(next_page)
         else:
-            return redirect(url_for('about'))
+            return redirect(url_for('favorites'))
 
     return render_template('login.html', title='Login', form=form)
 
@@ -58,13 +58,17 @@ def signup():
         return redirect(url_for('about'))
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash
-        user = Users(first_name=form.first_name.data,
+        user = Users(
+                first_name=form.first_name.data,
                 last_name=form.last_name.data,
                 email=form.email.data,
-                password=hashed_pw)
+                password=hashed_pw
+        )
         db.session.add(user)
-        db.session.commit
+        db.session.commit()
         return redirect(url_for('favorites'))
+    else:
+        print(form.errors)
     return render_template('signup.html',title='Sign Up', form=form)
 
 @app.route("/logout")
