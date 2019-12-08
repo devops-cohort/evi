@@ -9,6 +9,11 @@ from flask_login import login_user, current_user, logout_user, login_required
 def about():
     return render_template('about.html', title='Eurovision')
 
+@app.route('/home')
+def home():
+    Posts =Posts.query.order_by(Posts.id.desc()).all()
+    return render_template('home.html', title='Eurovision Favorite Entries')
+
 @app.route('/favorites', methods=[ 'GET','POST'])
 @login_required
 def favorites():
@@ -24,9 +29,9 @@ def favorites():
        db.session.commit()
     else:
        print(form.errors)
-       return render_template('favorites.html', title='Eurovision Favorite Entries', form=form)
+       return render_template('favorites.html', title='My Favorites', form=form)
 
-@app.route('/login'), methods=[ 'GET','POST'])
+@app.route('/login', methods=[ 'GET','POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('about'))
@@ -46,7 +51,7 @@ def login():
 
     return render_template('login.html', title='Login', form=form)
 
-@app.route('/signup'), methods=[ 'GET','POST'])
+@app.route('/signup', methods=[ 'GET','POST'])
 def signup():
     form = RegistrationForm()
     if current_user.is_authenticated:
@@ -82,4 +87,15 @@ def account():
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
     return render_template('account.html',title='Account',form=form)
+
+@app.route('/delete', methods=['GET','POST'])
+@login_required
+def delete(id):
+    deletefav = post.query.get(id)
+    try:
+        db.session.delete(deletefav)
+        db.session.comit()
+        return redirect(url_for('about'))
+    except:
+        return redirect(url_for('about'))
 

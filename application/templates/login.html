@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% block body_content %}
-        <h1>Login Page</h1>
+        <html>
+        <body bgcolor="#E6E6FA">
+        <center>
+	<h1>Login Page</h1>
         <div class="form-group">
                  <form method="POST" action="">
                         {{ form.hidden_tag() }}
@@ -42,4 +45,7 @@
         </div>
         </form>
         </div>
+	</center>
+	</body>
+	</html>
 {% endblock %}

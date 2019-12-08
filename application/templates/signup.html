@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
 {% block body_content %}
+<html>
+        <body bgcolor="#E6E6FA">
+        <center>
         <h1>Register Page</h1>
         <p>Need an account? Sign up!</p>
         <div class="form">
@@ -47,8 +50,6 @@
                                 {% endif %}
                         </div>
                         <br>
-                        <br>
-
                         <div class="form-group">
                                 {{ form.password.label }}
                                 {% if form.password.errors %}
@@ -62,6 +63,7 @@
                                         {{ form.password }}
                                 {% endif %}
                         </div>
+			<br>
 	                <div class="form-group">
                                {{ form.passwordcheck.label }}
                                {% if form.passwordcheck.errors %}
@@ -75,9 +77,14 @@
                                         {{ form.passwordcheck }}
                                 {% endif %}
                         </div>
+			<br>
+			<br>
                         <div class="form-group">
                                 {{ form.submit }}
                         </div>
                 </form>
         </div>
+	</center>>
+        </body">
+        </html>
 {% endblock%}
