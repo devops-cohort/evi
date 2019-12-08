@@ -55,9 +55,9 @@ def login():
 def signup():
     form = RegistrationForm()
     if current_user.is_authenticated:
-        return redirect(url_for('about'))
+        return redirect(url_for('home'))
     if form.validate_on_submit():
-        hashed_pw = bcrypt.generate_password_hash
+        hashed_pw = bcrypt.generate_password_hash(form.password.data)
         user = Users(
                 first_name=form.first_name.data,
                 last_name=form.last_name.data,

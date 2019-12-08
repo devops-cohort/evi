@@ -40,9 +40,9 @@ class Users(db.Model,UserMixin):
             'User ID: ',str(self.id), '\r\n',
             'Email:', self.email, '\r\n',
             'Name:', self.first_name, '',
-            self.last_name
+            self.last_name, ''
         ])
 
 @login_manager.user_loader
 def load_user(id):
-    return Users.query.get(init(id))
+    return Users.query.get(int(id))

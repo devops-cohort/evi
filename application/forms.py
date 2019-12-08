@@ -96,12 +96,12 @@ class RegistrationForm(FlaskForm):
     )
     submit = SubmitField('Sign Up')
 
-    #def validate_email(self, email):
-    #    user = Users.query.filter_by(email=email.data).first()
+    def validate_email(self, email):
+        user = Users.query.filter_by(email=email.data).first()
 
 
-     #   if user:
-      #      raise ValidationError('Email is alreadt in use!')
+        if user:
+            raise ValidationError('Email is alreadt in use!')
 
 class UpdateAccountForm(FlaskForm):
      first_name = StringField('First Name',
