@@ -1,7 +1,10 @@
 attrs==19.3.0
+bcrypt==3.1.7
+cffi==1.13.2
 Click==7.0
 coverage==4.5.4
 Flask==1.1.1
+Flask-Bcrypt==0.7.1
 Flask-Login==0.4.1
 Flask-SQLAlchemy==2.4.1
 Flask-Testing==0.7.1
@@ -13,6 +16,7 @@ more-itertools==8.0.2
 packaging==19.2
 pluggy==0.13.1
 py==1.8.0
+pycparser==2.19
 PyMySQL==0.9.3
 pyparsing==2.4.5
 pytest==5.3.1
