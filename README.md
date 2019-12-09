@@ -2,7 +2,7 @@
 
 Resources:
 
-* Presentation: github
+* Presentation: https://drive.google.com/open?id=1wODXbcBgYIO8XAxUXzyF087J9vY42FRh
 
 * Trello:https://trello.com/b/9zVAnqLa/individual-project
 
