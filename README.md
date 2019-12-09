@@ -1,4 +1,4 @@
-#***Eurovision Favorites Platform***
+# Eurovision Favorites Platform
 
 Resources:
 
