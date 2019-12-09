@@ -1,4 +1,5 @@
 import unittest
+import pytest
 
 from flask import abort, url_for
 from flask_testing import TestCase
@@ -13,12 +14,12 @@ class TestBase(TestCase):
          # pass in test configurations
         config_name = 'testing'
         app.config.update(
-                SQLALCHEMY_DATABASE_URI='mysql+pymysql://'+str(getenv('MY_SQL_USER'))+':'+str(getenv('MY_SQL_PASSWORD'))+'@'+str(getenv('MY_SQL_URL'))+'/'+str(getenv('MY_SQL_DB'))        )
+     SQLALCHEMY_DATABASE_URI='mysql+pymysql://'+str(getenv('MYSQL_USER'))+':'+str(getenv('MYSQL_PASSWORD'))+'@'+str(getenv('MYSQL_URL'))+'/'+str(getenv('DatabaseB'))        )
 
         return app
+ 
     
-    
-    def setUp(self):
+    '''def setUp(self):
         
         """
         Will be called before every test
@@ -46,7 +47,7 @@ class TestBase(TestCase):
 
         db.session.remove()
         db.drop_all()
-
+'''
 class testing(TestBase):
 
     def test_home_view(self):
@@ -68,6 +69,7 @@ class testing(TestBase):
         response = self.client.get(url_for('signup'))
         self.assertEqual(response.status_code, 200)
 '''
+
     def test_login_view(self):
         """
         test that login page is accessible without login
@@ -84,4 +86,3 @@ class testing(TestBase):
         self.assertEqual(responce.status_code,302)
         self.assertRedirects(response,redirect_url
 '''
-
